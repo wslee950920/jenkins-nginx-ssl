@@ -1,17 +1,18 @@
 version: "3"
 services:
   master:
-    build: ./jenkins
+    image: jenkins/jenkins:lts
     ports:
       - "50000:50000"
-      - "8888:8080"
     networks:
       - jenkins-net
+    expose: 
+      - "8080"
 
   nginx:
     build: ./nginx
     ports:
-      - "80:80"
+      - "8888:8888"
       - "443:443"
     depends_on:
       - master
